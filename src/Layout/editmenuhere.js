@@ -1,10 +1,10 @@
 export const main_menu = [
   { target: "/", text: "Home" },
-  { target: "/sample", text: "Flowbite Component" },
+  { target: "/sample", text: "Components" },
 ];
 
 export const dropdown_menu_1 = {
-  text: "Dropdown Menu",
+  text: "Others",
   sub_menu_col_1: [
     {
       target: "/products",

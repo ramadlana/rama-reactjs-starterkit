@@ -37,7 +37,6 @@ export default function App() {
           {/* Protected Wrapper */}
           <Route path="/" element={<ProtectedRoutes></ProtectedRoutes>}>
             {/* Dashboard Layout Wrapper */}
-
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<Homepage />}></Route>
               <Route
@@ -50,7 +49,6 @@ export default function App() {
                 <Route path=":product_id" element={<ProductId />} />
               </Route>
             </Route>
-
             {/* Dashboard Layout Wrapper */}
           </Route>
 

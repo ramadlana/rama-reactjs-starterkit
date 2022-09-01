@@ -36,8 +36,8 @@ function Login() {
     handleLogin();
   }, []);
   const [allinput, setallInput] = useState({
-    username: "",
-    password: "",
+    username: "test",
+    password: "test12345",
   });
 
   function handleInputOnChange(event) {
