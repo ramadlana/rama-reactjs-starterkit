@@ -1,3 +1,4 @@
+import { Card } from "flowbite-react";
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
@@ -8,16 +9,20 @@ export default function ProductIndex() {
     { id: 3, productName: "this is product number 3" },
   ];
   return (
-    <React.Fragment>
-      <p className="text-3xl font-bold underline">
-        this is products index Page
+    <>
+      <p className="text-3xl font-bold underline mb-3">
+        This is products index Page
       </p>
-      {product_list.map((product) => (
-        <li key={`${product.id}`}>
-          <Link to={`/products/${product.id}`}>{product.id}</Link>
-        </li>
-      ))}
-      <Outlet></Outlet>
-    </React.Fragment>
+      <Card>
+        {product_list.map((product) => (
+          <li key={`${product.id}`}>
+            <Link to={`/products/${product.id}`}>{product.id}</Link>
+          </li>
+        ))}
+      </Card>
+      <Card className="mt-2">
+        <Outlet></Outlet>
+      </Card>
+    </>
   );
 }

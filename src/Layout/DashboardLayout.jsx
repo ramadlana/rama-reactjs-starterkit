@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 
 import LayoutNavbar from "./LayoutNavbar";
+
 const DashboardLayout = () => {
   return (
     <div>

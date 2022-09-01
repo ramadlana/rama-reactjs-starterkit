@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Homepage() {
   return (
-    <div>
+    <div className="m-5">
       <h1 className="text-2xl font-bold mb-2">This is Home Page</h1>
       <Card>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eos

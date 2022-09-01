@@ -8,11 +8,19 @@ import {
   TextInput,
   Label,
   Select,
+  Tabs,
   Table,
-  Pagination,
   Spinner,
+  Breadcrumb,
 } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
+import {
+  HiInformationCircle,
+  HiUserCircle,
+  HiAdjustments,
+  HiClipboardList,
+  HiHome,
+} from "react-icons/hi";
+import { MdDashboard } from "react-icons/md";
 import { useState } from "react";
 
 function FlowbiteComponentSample() {
@@ -30,14 +38,21 @@ function FlowbiteComponentSample() {
 
   // ------------------------------ State ------------------------------
   const [modal, setModal] = useState(false);
+
   // Form all input define schema here before created input form
   const [allinput, setallInput] = useState({
-    name: null,
-    email: null,
-    age: null,
-    birth: null,
-    countries: null,
+    name: "",
+    email: "",
+    age: "",
+    birth: "",
+    countries: "",
   });
+  //  Input Handler
+  function handleInputOnChange(event) {
+    let input_copy = { ...allinput };
+    input_copy[`${event.target.id}`] = event.target.value;
+    setallInput(input_copy);
+  }
 
   // ------------------------------ Event Handler ------------------------------
   function onClick() {
@@ -48,13 +63,6 @@ function FlowbiteComponentSample() {
     setModal(false);
   }
 
-  function InputOnChange(el) {
-    let input_copy = { ...allinput };
-    input_copy[`${el.id}`] = el.value;
-    console.log(input_copy);
-    setallInput(input_copy);
-  }
-
   function OnPageChange() {
     console.log("page changes");
   }
@@ -62,11 +70,38 @@ function FlowbiteComponentSample() {
   // ------------------------------ Return ------------------------------
 
   return (
-    <div className="m-5">
-      <h1 className="text-2xl font-bold underline mb-2">
+    <div className="mx-5">
+      <h1 className="text-xl font-bold mb-2">
         This is Sample Flowbite Page Component
       </h1>
+
       <Card>
+        {/* Breadcump */}
+        <Breadcrumb aria-label="Default breadcrumb example">
+          <Breadcrumb.Item href="#" icon={HiHome}>
+            Home
+          </Breadcrumb.Item>
+          <Breadcrumb.Item href="#">Projects</Breadcrumb.Item>
+          <Breadcrumb.Item>Flowbite React</Breadcrumb.Item>
+        </Breadcrumb>
+        {/* Tab Group */}
+        <Tabs.Group aria-label="Tabs with icons" style="underline">
+          <Tabs.Item active={true} title="Profile" icon={HiUserCircle}>
+            Profile content
+          </Tabs.Item>
+          <Tabs.Item active={false} title="Dashboard" icon={MdDashboard}>
+            Dashboard content
+          </Tabs.Item>
+          <Tabs.Item title="Settings" icon={HiAdjustments}>
+            Settings content
+          </Tabs.Item>
+          <Tabs.Item title="Contacts" icon={HiClipboardList}>
+            Contacts content
+          </Tabs.Item>
+          <Tabs.Item disabled={true} title="Disabled">
+            Disabled content
+          </Tabs.Item>
+        </Tabs.Group>
         {/* Text Input */}
         <Label htmlFor="name" value="Fill with your name" />
         <TextInput
@@ -74,7 +109,7 @@ function FlowbiteComponentSample() {
           type="text"
           placeholder="Your Name Here"
           value={allinput.name}
-          onChange={(el) => InputOnChange(el.currentTarget)}
+          onChange={handleInputOnChange}
         ></TextInput>
 
         <Label htmlFor="email" value="Email" />
@@ -83,7 +118,7 @@ function FlowbiteComponentSample() {
           type="email"
           placeholder="Your Email Here"
           value={allinput.email}
-          onChange={(el) => InputOnChange(el.currentTarget)}
+          onChange={handleInputOnChange}
         ></TextInput>
 
         <Label htmlFor="age" value="Age" />
@@ -92,7 +127,7 @@ function FlowbiteComponentSample() {
           type="number"
           placeholder="Your Age Here"
           value={allinput.age}
-          onChange={(el) => InputOnChange(el.currentTarget)}
+          onChange={handleInputOnChange}
         ></TextInput>
 
         <Label htmlFor="birth" value="Your Birthday" />
@@ -102,20 +137,16 @@ function FlowbiteComponentSample() {
             "w-60 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           }
           id="birth"
-          onChange={(el) => InputOnChange(el.currentTarget)}
+          onChange={handleInputOnChange}
         ></input>
 
         <div id="select">
           <div className="mb-2 block">
             <Label htmlFor="countries" value="Select your country" />
           </div>
-          <Select
-            id="countries"
-            required={true}
-            onChange={(el) => InputOnChange(el.currentTarget)}
-          >
+          <Select id="countries" required={true} onChange={handleInputOnChange}>
             {country_example.map((country) => (
-              <option>{country}</option>
+              <option key={country}>{country}</option>
             ))}
           </Select>
         </div>
