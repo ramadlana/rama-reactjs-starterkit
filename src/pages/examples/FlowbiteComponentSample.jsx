@@ -12,16 +12,20 @@ import {
   Table,
   Spinner,
   Breadcrumb,
+  Pagination,
 } from "flowbite-react";
 import {
   HiInformationCircle,
   HiUserCircle,
   HiAdjustments,
   HiClipboardList,
+  HiCloudDownload,
   HiHome,
+  HiTable,
 } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function FlowbiteComponentSample() {
   // ------------------------------ Sample Data ------------------------------
@@ -54,6 +58,9 @@ function FlowbiteComponentSample() {
     setallInput(input_copy);
   }
 
+  // ------------------------------ Variables ------------------------------
+  const navigate = useNavigate();
+
   // ------------------------------ Event Handler ------------------------------
   function onClick() {
     setModal(true);
@@ -63,14 +70,28 @@ function FlowbiteComponentSample() {
     setModal(false);
   }
 
-  function OnPageChange() {
-    console.log("page changes");
-  }
-
   // ------------------------------ Return ------------------------------
 
   return (
-    <div className="mx-5">
+    <div>
+      <div className="mb-2">
+        {/* Other Sample Component */}
+        <Button.Group>
+          <Button
+            size={"xs"}
+            color="gray"
+            onClick={() => navigate("/example/tableexample")}
+          >
+            <HiTable className="mr-3 h-4 w-4" /> Table Example
+          </Button>
+          <Button size={"xs"} color="gray">
+            <HiAdjustments className="mr-3 h-4 w-4" /> Other Example
+          </Button>
+          <Button size={"xs"} color="gray">
+            <HiCloudDownload className="mr-3 h-4 w-4" /> Other Example
+          </Button>
+        </Button.Group>
+      </div>
       <h1 className="text-xl font-bold mb-2">
         This is Sample Flowbite Page Component
       </h1>
@@ -318,101 +339,8 @@ function FlowbiteComponentSample() {
           <Spinner aria-label="Large spinner example" size="lg" />
           <Spinner aria-label="Extra large spinner example" size="xl" />
         </div>
-
-        {/* Table */}
-        <Table hoverable={true}>
-          <Table.Head>
-            <Table.HeadCell>Product name</Table.HeadCell>
-            <Table.HeadCell>Color</Table.HeadCell>
-            <Table.HeadCell>Category</Table.HeadCell>
-            <Table.HeadCell>Price</Table.HeadCell>
-            <Table.HeadCell>
-              <span className="sr-only">Edit</span>
-            </Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Apple MacBook Pro 17"
-              </Table.Cell>
-              <Table.Cell>Sliver</Table.Cell>
-              <Table.Cell>Laptop</Table.Cell>
-              <Table.Cell>$2999</Table.Cell>
-              <Table.Cell>
-                <a
-                  href="/tables"
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Edit
-                </a>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Microsoft Surface Pro
-              </Table.Cell>
-              <Table.Cell>White</Table.Cell>
-              <Table.Cell>Laptop PC</Table.Cell>
-              <Table.Cell>$1999</Table.Cell>
-              <Table.Cell>
-                <a
-                  href="/tables"
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Edit
-                </a>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Magic Mouse 2
-              </Table.Cell>
-              <Table.Cell>Black</Table.Cell>
-              <Table.Cell>Accessories</Table.Cell>
-              <Table.Cell>$99</Table.Cell>
-              <Table.Cell>
-                <a
-                  href="/tables"
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Edit
-                </a>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-        {/* Pagination */}
-
-        <div className="flex flex-col items-center">
-          {/* Help text */}
-          <span className="text-sm text-gray-700 dark:text-gray-400">
-            Showing{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              1
-            </span>{" "}
-            to{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              10
-            </span>{" "}
-            of{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              100
-            </span>{" "}
-            Entries
-          </span>
-          {/* Buttons */}
-          <div className="inline-flex mt-2 xs:mt-0">
-            <button className="py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Prev
-            </button>
-            <button className="py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* End card */}
       </Card>
+      {/* End card */}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
+import { getAuth } from "../middleware/getAuth";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,28 +13,23 @@ function Login() {
   const [isAuth, setIsAuth] = useState(false);
   // check if user already login
   useEffect(() => {
-    async function handleLogin() {
+    async function loginCheck() {
       try {
-        const resp = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}/dashboard`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "x-access-token": localStorage.getItem("x-access-token"),
-            },
-          }
-        );
-
-        if (resp.data) {
+        const isLogin = await getAuth();
+        if (isLogin.status === 200) {
           setIsloading(false);
           setIsAuth(true);
+        }
+        if (isLogin.status !== 200) {
+          setIsloading(false);
+          setIsAuth(false);
         }
       } catch (error) {
         setIsloading(false);
         setIsAuth(false);
       }
     }
-    handleLogin();
+    loginCheck();
   }, []);
   const [allinput, setallInput] = useState({
     username: "test",
@@ -115,6 +111,7 @@ function Login() {
                     type="text"
                     name="text"
                     id="username"
+                    value={allinput.username}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Your username"
                     required
@@ -132,6 +129,7 @@ function Login() {
                     type="password"
                     name="password"
                     id="password"
+                    value={allinput.password}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required

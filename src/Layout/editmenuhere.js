@@ -1,13 +1,14 @@
 export const main_menu = [
   { target: "/", text: "Home" },
-  { target: "/sample", text: "Components" },
+  { target: "/example/flowbitecomponents", text: "Component Ex" },
+  { target: "/example/menugroup", text: "Others Ex" },
 ];
 
 export const dropdown_menu_1 = {
   text: "Others",
   sub_menu_col_1: [
     {
-      target: "/products",
+      target: "/example/productsexample",
       text: "Sample Products",
       desc: "This is Sample Flowbite component using nested component routes",
     },
@@ -41,7 +42,7 @@ export const dropdown_menu_1 = {
   ],
   sub_menu_col_3: [
     {
-      target: "/products",
+      target: "/example/productsexample",
       text: "Column 3a",
       desc: "This is Sample Flowbite component using nested component routes",
     },

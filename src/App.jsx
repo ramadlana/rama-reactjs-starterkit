@@ -26,33 +26,62 @@ import PageOne from "./pages/examples/recoilsample/PageOne";
 import PageTwo from "./pages/examples/recoilsample/PageTwo";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Logout from "./pages/Logout";
+import TableExample from "./pages/examples/TableExample";
+import MenuGroup from "./pages/examples/menugroup/MenuGroup";
+import HomePageMenuGroup from "./pages/examples/menugroup/HomePageMenuGroup";
 
 export default function App() {
   return (
+    // Recoil Root
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
           {/* After add here, dont forget to add on navbar or side bar menu nav */}
-
           {/* Protected Wrapper */}
           <Route path="/" element={<ProtectedRoutes></ProtectedRoutes>}>
             {/* Dashboard Layout Wrapper */}
-            <Route path="/" element={<DashboardLayout />}>
+            <Route element={<DashboardLayout />}>
+              {/* all child dashboard here, in react-router-dom v6 remove all slash for child route */}
               <Route index element={<Homepage />}></Route>
-              <Route
-                path="/sample"
-                element={<FlowbiteComponentSample></FlowbiteComponentSample>}
-              ></Route>
-              <Route path="recoilpageone" element={<PageOne></PageOne>}></Route>
-              <Route path="recoilpagetwo" element={<PageTwo></PageTwo>}></Route>
-              <Route path="products" element={<ProductIndex></ProductIndex>}>
-                <Route path=":product_id" element={<ProductId />} />
+              {/* Example components */}
+              <Route path="example">
+                <Route
+                  path="flowbitecomponents"
+                  element={<FlowbiteComponentSample></FlowbiteComponentSample>}
+                ></Route>
+                {/* Menu Group */}
+                <Route path="menugroup" element={<MenuGroup></MenuGroup>}>
+                  <Route
+                    index
+                    element={<HomePageMenuGroup></HomePageMenuGroup>}
+                  ></Route>
+                  <Route
+                    path="recoilpageone"
+                    element={<PageOne></PageOne>}
+                  ></Route>
+                  <Route
+                    path="recoilpagetwo"
+                    element={<PageTwo></PageTwo>}
+                  ></Route>
+                </Route>
+                <Route
+                  path="tableexample"
+                  element={<TableExample></TableExample>}
+                ></Route>
+                <Route
+                  path="productsexample"
+                  element={<ProductIndex></ProductIndex>}
+                >
+                  <Route path=":product_id" element={<ProductId />} />
+                </Route>
               </Route>
+              {/* Example components */}
+              {/* all child dashboard here */}
             </Route>
             {/* Dashboard Layout Wrapper */}
           </Route>
-
-          {/* Outer  */}
+          {/* Protected Wrapper*/}
+          {/* Outer Route (not protected and no layout)  */}
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/logout" element={<Logout></Logout>}></Route>
           <Route path="*" element={<NotFoundPage />} />

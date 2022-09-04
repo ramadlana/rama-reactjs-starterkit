@@ -16,7 +16,9 @@ export default function ProductIndex() {
       <Card>
         {product_list.map((product) => (
           <li key={`${product.id}`}>
-            <Link to={`/products/${product.id}`}>{product.id}</Link>
+            <Link to={`/example/productsexample/${product.id}`}>
+              {product.id}
+            </Link>
           </li>
         ))}
       </Card>

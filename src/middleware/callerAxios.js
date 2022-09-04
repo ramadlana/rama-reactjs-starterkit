@@ -1,39 +1,41 @@
 import axios from "axios";
 
 /**
- * headers using string or JSON
- * data use object
+ * Custom Axios Get
+ * @param {string} url - your url to call
+ * @param {string} headers - headers as object
+ * @returns {Promise} Return promise object {data:<object>, config:<object>, status:<number>, statusText:<string>}
  */
-export async function callerAxiosGet(url) {
+export async function callerAxiosGet(url, headers) {
   try {
     const resp = await axios.get(`${url}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("x-access-token"),
-      },
+      headers: headers,
     });
 
-    if (resp.data) {
-      return resp.data;
+    if (resp) {
+      return resp;
     }
   } catch (error) {
-    return error;
+    return error.response;
   }
 }
 
+/**
+ * @param {string} url - your url to call
+ * @param {string} headers - headers as object
+ * @param {Object} data:Object - data as object
+ * @returns {Promise} Object - data:Object, config:object, status:number, statusText:string
+ */
 export async function callerAxiosPost(url, data, headers) {
   try {
     const resp = await axios.post(`${url}`, `${data}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("x-access-token"),
-      },
+      headers: headers,
     });
 
-    if (resp.data) {
-      return resp.data;
+    if (resp) {
+      return resp;
     }
   } catch (error) {
-    return error;
+    return error.response;
   }
 }

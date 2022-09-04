@@ -12,11 +12,9 @@ const DashboardLayout = () => {
         </div>
       </div>
 
-      <div className="flex">
-        {/* here child component will be rendered */}
-        <div className="flex-auto m-5">
-          <Outlet />
-        </div>
+      {/* here child component will be rendered */}
+      <div className="m-10">
+        <Outlet />
       </div>
     </div>
   );
