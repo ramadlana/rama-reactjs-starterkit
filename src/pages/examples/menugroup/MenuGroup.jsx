@@ -1,7 +1,7 @@
 import { Card, Button } from "flowbite-react";
 import React from "react";
 import { HiOutlineViewGrid } from "react-icons/hi";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 function MenuGroup() {
   const navigate = useNavigate();

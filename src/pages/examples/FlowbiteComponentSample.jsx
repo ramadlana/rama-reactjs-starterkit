@@ -9,10 +9,8 @@ import {
   Label,
   Select,
   Tabs,
-  Table,
   Spinner,
   Breadcrumb,
-  Pagination,
 } from "flowbite-react";
 import {
   HiInformationCircle,

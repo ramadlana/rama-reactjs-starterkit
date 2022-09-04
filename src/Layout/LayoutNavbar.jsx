@@ -23,7 +23,7 @@ function LayoutNavbar() {
   }
   return (
     <nav className="bg-white border-gray-900 dark:border-gray-600 dark:bg-gray-900 shadow-sm shadow-zinc-300">
-      <div className="flex flex-wrap justify-between items-center mx-auto px-4 px-6 py-2.5">
+      <div className="flex flex-wrap justify-between items-center mx-auto px-6 py-2.5">
         <Link to="/" className="flex items-center">
           <img
             src="/logo.svg"
