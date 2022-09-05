@@ -1,4 +1,4 @@
-import { callerAxiosGet } from "./callerAxios";
+import { callerAxiosGet, callerAxiosPost } from "./callerAxios";
 
 export async function getAuth() {
   try {
@@ -9,6 +9,22 @@ export async function getAuth() {
         "x-access-token": localStorage.getItem("x-access-token"),
       }
     );
+    return req;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ sign in middleware (POST)
+ * @param {string} url - your url to call
+ * @param {{username: string, password: string}} data - data as object
+ * @param {{headers: objects, others: objects}} configs - configs as object
+ * @returns {Promise<{data:object, config: object, status: number, statusText: string}>} Return object
+ */
+export async function signIn(url, data, configs) {
+  try {
+    const req = await callerAxiosPost(url, data, configs);
     return req;
   } catch (error) {
     return false;

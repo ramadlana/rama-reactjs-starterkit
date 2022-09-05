@@ -21,16 +21,15 @@ export async function callerAxiosGet(url, headers) {
 }
 
 /**
+ * Axios custom callers (POST)
  * @param {string} url - your url to call
- * @param {string} headers - headers as object
- * @param {Object} data:Object - data as object
- * @returns {Promise} Object - data:Object, config:object, status:number, statusText:string
+ * @param {{foo: any, bar: any}} data - data as object
+ * @param {{headers: objects, others: objects}} configs - configs as object
+ * @returns {Promise<{data:object, config: object, status: number, statusText: string}>} Return object
  */
-export async function callerAxiosPost(url, data, headers) {
+export async function callerAxiosPost(url, data, configs) {
   try {
-    const resp = await axios.post(`${url}`, `${data}`, {
-      headers: headers,
-    });
+    const resp = await axios.post(`${url}`, data, configs);
 
     if (resp) {
       return resp;

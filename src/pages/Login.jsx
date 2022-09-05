@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
-import { getAuth } from "../middleware/getAuth";
+import { getAuth, signIn } from "../middleware/getAuth";
 
 function Login() {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ function Login() {
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const resp = await axios.post(
+      const check = await signIn(
         `${process.env.REACT_APP_BACKEND_SERVER}/sign/in`,
         allinput,
         {
@@ -55,16 +55,15 @@ function Login() {
         }
       );
 
-      if (resp.data) {
-        toast.success(`${resp.data.message}`);
-        localStorage.setItem("x-access-token", resp.data.access_token);
+      if (check.status === 200) {
+        toast.success(`${check.data.message}`);
+        localStorage.setItem("x-access-token", check.data.access_token);
         navigate("/");
       }
-    } catch (error) {
-      toast.error(
-        `${error.response ? error.response.data.message : error.message}`
-      );
-    }
+      if (check.status !== 200) {
+        toast.error(`${check.data ? check.data.message : "unknown error"}`);
+      }
+    } catch (err) {}
   }
 
   //   if page is loading
