@@ -24,6 +24,11 @@ function Login() {
           setIsloading(false);
           setIsAuth(false);
         }
+
+        if (isLogin.status === 500) {
+          setIsloading(false);
+          setIsAuth(false);
+        }
       } catch (error) {
         setIsloading(false);
         setIsAuth(false);
@@ -59,6 +64,15 @@ function Login() {
         toast.success(`${check.data.message}`);
         localStorage.setItem("x-access-token", check.data.access_token);
         navigate("/");
+      }
+      if (check.status === 500) {
+        return toast.error(
+          `${
+            check.data.message
+              ? check.data.message
+              : "Error when connecting to database"
+          }`
+        );
       }
       if (check.status !== 200) {
         toast.error(`${check.data ? check.data.message : "unknown error"}`);
