@@ -11,7 +11,6 @@ function ProductId() {
   let selected_product = product_list.filter(
     (product) => product.id === parseInt(product_id)
   );
-  console.log(selected_product);
   return (
     <>
       <h4>
