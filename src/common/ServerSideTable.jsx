@@ -1,6 +1,5 @@
 import { Table } from "flowbite-react";
 import { Label, Select, TextInput } from "flowbite-react";
-import { useEffect } from "react";
 import { useState } from "react";
 
 export default function ServerSideTable({
@@ -8,8 +7,6 @@ export default function ServerSideTable({
   parentTableProperty,
   parentSetTableProperty,
 }) {
-  const [tableError, setTableError] = useState();
-
   function onNext() {
     let cpParentProps = { ...parentTableProperty };
     cpParentProps.page =
@@ -43,7 +40,11 @@ export default function ServerSideTable({
   function renderCellColumn(row, header) {
     //    if headers is element render element instead data
     if (header.type === "element")
-      return <Table.Cell key={Math.random()}>{header.el(row.id)}</Table.Cell>;
+      return (
+        <Table.Cell key={Math.random()}>
+          {header.el(row[parentTableProperty.idProperty])}
+        </Table.Cell>
+      );
     // render tdata.data
     return (
       <Table.Cell key={Math.random()}>{row[`${header.title}`]}</Table.Cell>
@@ -138,7 +139,6 @@ export default function ServerSideTable({
             <Table.HeadCell key={header.title}>{header.title}</Table.HeadCell>
           ))}
         </Table.Head>
-        {tableError}
         <Table.Body className="divide-y">
           {/* Map tdata.data */}
           {tdata.data.map((row) => {

@@ -5,6 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 import { getAuth, signIn } from "../middleware/getAuth";
+import axios from "axios";
+import { callerAxiosPost } from "../middleware/callerAxios";
+import { data } from "autoprefixer";
 
 function Login() {
   const navigate = useNavigate();
@@ -48,6 +51,16 @@ function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
+    // Coba coba
+    const testa = callerAxiosPost(
+      "https://fastapi-7c4odlhlmq-et.a.run.app/secure-login",
+      { username: "test", password: "test" },
+      { withCredentials: true }
+    )
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+
+    // coba coba end
     try {
       const check = await signIn(
         `${process.env.REACT_APP_BACKEND_SERVER}/sign/in`,

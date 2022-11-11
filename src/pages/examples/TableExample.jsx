@@ -12,6 +12,7 @@ function TableExample() {
 
   // Table Property
   const [tableProperty, setTableProperty] = useState({
+    idProperty: "id", // if table use primary_key id another than "id" is must be change here, for ex: "customer_id"
     paginationPage: 1, // used to display pagination in frontend
     page: 0, // used to calculated skip page to backen
     maxPerpage: 10, //
@@ -23,19 +24,20 @@ function TableExample() {
     searchOptionItems: ["id", "name", "address"],
   });
 
-  // Table constructor
+  // Table constructor, must be match with prisma schema for regular row
+  // For rendered element row, title is arbitary
   const tableConstructor = {
     headers: [
-      // Regular Data
+      // Regular row
       { type: "regular", title: "id" },
       { type: "regular", title: "name" },
       { type: "regular", title: "address" },
-      //   Element Data. its return such as button, a link, etc
+      //   Rendered Element row. its return such as button, a link, etc
       {
         type: "element",
         title: "delete",
-        el: function deleteUser(id) {
-          return <a href={`/user/${id}`}>{id}</a>;
+        el: function deleteUser(id_naming) {
+          return <a href={`${id_naming}`}>{id_naming}</a>;
         },
       },
     ],
