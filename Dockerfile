@@ -11,7 +11,7 @@ RUN npm ci
 
 RUN npm install -g serve
 
-# Build the app
+# Build the apps
 RUN npm run build
 # ==== RUN =======
 # Set the env to "production"
