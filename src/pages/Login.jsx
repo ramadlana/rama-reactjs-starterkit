@@ -53,7 +53,7 @@ function Login() {
     event.preventDefault();
     // Coba coba
     const testa = callerAxiosPost(
-      "https://fastapi-7c4odlhlmq-et.a.run.app/secure-login",
+      "https://fastapi-7c4odlhlmq-uc.a.run.app/secure-login",
       { username: "test", password: "test" },
       { withCredentials: true }
     )
