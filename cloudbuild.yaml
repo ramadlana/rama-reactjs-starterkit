@@ -26,6 +26,7 @@ steps:
         "run",
         "deploy",
         "reactstarterkit",
+        "--port=3000",
         "--image=gcr.io/rama-lab/github.com/ramadlana/rama-reactjs-starterkit:$SHORT_SHA",
         "--allow-unauthenticated",
         "--region=asia-southeast2",
