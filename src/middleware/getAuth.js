@@ -3,10 +3,11 @@ import { callerAxiosGet, callerAxiosPost } from "./callerAxios";
 export async function getAuth() {
   try {
     const req = await callerAxiosGet(
-      `${process.env.REACT_APP_BACKEND_SERVER}/dashboard`,
+      `${process.env.REACT_APP_BACKEND_SERVER}/getauth`,
       {
         "Content-Type": "application/json",
         "x-access-token": localStorage.getItem("x-access-token"),
+        // withCredentials: true,
       }
     );
     return req;

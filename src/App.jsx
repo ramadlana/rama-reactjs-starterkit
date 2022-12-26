@@ -29,6 +29,7 @@ import Logout from "./pages/Logout";
 import TableExample from "./pages/examples/TableExample";
 import MenuGroup from "./pages/examples/menugroup/MenuGroup";
 import HomePageMenuGroup from "./pages/examples/menugroup/HomePageMenuGroup";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   return (
@@ -36,15 +37,16 @@ export default function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          {/* After add here, dont forget to add on navbar or side bar menu nav */}
+          {/* Home index */}
+          <Route index element={<Homepage />}></Route>
           {/* Protected Wrapper */}
           <Route path="/" element={<ProtectedRoutes></ProtectedRoutes>}>
             {/* Dashboard Layout Wrapper */}
             <Route element={<DashboardLayout />}>
               {/* all child dashboard here, in react-router-dom v6 remove all slash for child route */}
-              <Route index element={<Homepage />}></Route>
               {/* Example components */}
-              <Route path="example">
+              <Route path="/example">
+                <Route index element={<Dashboard></Dashboard>}></Route>
                 <Route
                   path="flowbitecomponents"
                   element={<FlowbiteComponentSample></FlowbiteComponentSample>}

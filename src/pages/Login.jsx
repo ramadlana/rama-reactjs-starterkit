@@ -5,9 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 import { getAuth, signIn } from "../middleware/getAuth";
-import axios from "axios";
-import { callerAxiosPost } from "../middleware/callerAxios";
-import { data } from "autoprefixer";
 
 function Login() {
   const navigate = useNavigate();
@@ -38,6 +35,8 @@ function Login() {
     }
     loginCheck();
   }, []);
+
+  // Remove value test:test12345 in prods
   const [allinput, setallInput] = useState({
     username: "test",
     password: "test12345",
@@ -51,16 +50,6 @@ function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    // Coba coba
-    const testa = callerAxiosPost(
-      "https://be.netventura.com/secure-login",
-      { username: "test", password: "test" },
-      { withCredentials: true }
-    )
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
-
-    // coba coba end
     try {
       const check = await signIn(
         `${process.env.REACT_APP_BACKEND_SERVER}/sign/in`,
@@ -68,14 +57,14 @@ function Login() {
         {
           headers: {
             "Content-Type": "application/json",
+            withCredentials: true,
           },
         }
       );
 
       if (check.status === 200) {
         toast.success(`${check.data.message}`);
-        localStorage.setItem("x-access-token", check.data.access_token);
-        navigate("/");
+        navigate("/example");
       }
       if (check.status === 500) {
         return toast.error(

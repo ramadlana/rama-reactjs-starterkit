@@ -1,9 +1,9 @@
 import { Table } from "flowbite-react";
 import { Label, Select, TextInput } from "flowbite-react";
-import { useState } from "react";
 
 export default function ServerSideTable({
-  tdata,
+  table_column,
+  table_data_row,
   parentTableProperty,
   parentSetTableProperty,
 }) {
@@ -135,20 +135,22 @@ export default function ServerSideTable({
       <div className="flex"></div>
       <Table hoverable={true}>
         <Table.Head>
-          {tdata.headers.map((header) => (
+          {table_column.headers.map((header) => (
             <Table.HeadCell key={header.title}>{header.title}</Table.HeadCell>
           ))}
         </Table.Head>
         <Table.Body className="divide-y">
           {/* Map tdata.data */}
-          {tdata.data.map((row) => {
+          {table_data_row.map((row) => {
             // Render table row, with passing row(from data) and header from headers
             return (
               <Table.Row
                 key={row.id}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
               >
-                {tdata.headers.map((header) => renderCellColumn(row, header))}
+                {table_column.headers.map((header) =>
+                  renderCellColumn(row, header)
+                )}
               </Table.Row>
             );
           })}

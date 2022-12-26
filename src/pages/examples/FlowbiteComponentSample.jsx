@@ -104,7 +104,8 @@ function FlowbiteComponentSample() {
           <Breadcrumb.Item>Flowbite React</Breadcrumb.Item>
         </Breadcrumb>
         {/* Tab Group */}
-        <Tabs.Group aria-label="Tabs with icons" style="underline">
+        <Tabs.Group aria-label="Tabs with icons">
+          {/* style="underline" */}
           <Tabs.Item active={true} title="Profile" icon={HiUserCircle}>
             Profile content
           </Tabs.Item>

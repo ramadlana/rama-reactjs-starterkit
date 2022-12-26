@@ -1,4 +1,3 @@
-import { Carousel } from "flowbite-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 

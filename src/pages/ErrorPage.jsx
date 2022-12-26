@@ -11,7 +11,9 @@ function ErrorPage({ error }) {
         <Alert color="failure" icon={HiInformationCircle}>
           <span>
             <span className="font-medium">Error {error.status} </span>{" "}
-            {error.data.message}
+            {error.status === 401
+              ? "You must logged in to access this page"
+              : error.data.message}
           </span>
         </Alert>
         <div className="">

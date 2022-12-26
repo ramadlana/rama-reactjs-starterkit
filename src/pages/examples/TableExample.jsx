@@ -12,21 +12,25 @@ function TableExample() {
 
   // Table Property
   const [tableProperty, setTableProperty] = useState({
-    idProperty: "id", // if table use primary_key id another than "id" is must be change here, for ex: "customer_id"
-    paginationPage: 1, // used to display pagination in frontend
-    page: 0, // used to calculated skip page to backen
+    // If table on database use primary_key id another than "id" is must be change, for ex: "customer_id"
+    idProperty: "id",
+    // used to display pagination in frontend
+    paginationPage: 1,
+    page: 0, // used to calculated skip page to backend
     maxPerpage: 10, //
     sortBy: "id",
     sortMethod: "asc",
     searchBy: "name",
-    searchValue: "", // search text
-    sortOptionItems: ["id", "name", "address"], // select option for sortby and search by
-    searchOptionItems: ["id", "name", "address"],
+    // for search field
+    searchValue: "",
+    // Available list option on form
+    sortOptionItems: ["id", "name", "address"],
+    searchOptionItems: ["name", "address"],
   });
 
   // Table constructor, must be match with prisma schema for regular row
   // For rendered element row, title is arbitary
-  const tableConstructor = {
+  const table_column = {
     headers: [
       // Regular row
       { type: "regular", title: "id" },
@@ -45,39 +49,44 @@ function TableExample() {
   };
 
   // TableState. its contain table constructor like header, and filled by use effect
-  const [tablestate, setTableState] = useState(tableConstructor);
+
+  const [tableDataRow, setTableDataRow] = useState([]);
 
   // Use effect to get initial data Table
   useEffect(() => {
     async function getTableData() {
       // call middleware callerAxios
-      const t_data = await callerAxiosGet(
-        `${process.env.REACT_APP_BACKEND_SERVER}/dashboard/alluser?sortBy=${tableProperty.sortBy}&sortMethod=${tableProperty.sortMethod}&searchBy=${tableProperty.searchBy}&searchValue=${tableProperty.searchValue}&page=${tableProperty.page}&maxPerpage=${tableProperty.maxPerpage}`,
-        {
-          "x-access-token": localStorage.getItem("x-access-token"),
-        }
-      );
-
-      setTableState({ ...tablestate, data: t_data.data });
+      const url = `${process.env.REACT_APP_BACKEND_SERVER}/prisma/alluser?sortBy=${tableProperty.sortBy}&sortMethod=${tableProperty.sortMethod}&searchBy=${tableProperty.searchBy}&searchValue=${tableProperty.searchValue}&page=${tableProperty.page}&maxPerpage=${tableProperty.maxPerpage}`;
+      const t_data = await callerAxiosGet(url, {
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        },
+      });
+      // Set state use fetch data result
+      setTableDataRow(t_data.data);
     }
     getTableData();
+
     // useEffect get called again every change happen in this dependency list (tableProperty changed)
   }, [tableProperty]);
 
   return (
     <div>
       <div className="mb-2">
-        {/* Going back history one step back */}
+        {/* Back button */}
         <Button size={"xs"} color="gray" onClick={() => navigate(-1)}>
           <HiBackspace className="mr-3 h-4 w-4" />
           Back
         </Button>
       </div>
+      {/* Table */}
       <h1 className="text-xl font-bold mb-2">Table Examples</h1>
       <Card>
         {/* call table server side table component */}
         <ServerSideTable
-          tdata={tablestate}
+          table_column={table_column}
+          table_data_row={tableDataRow}
           parentTableProperty={tableProperty}
           parentSetTableProperty={setTableProperty}
         ></ServerSideTable>

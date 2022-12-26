@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { dropdown_menu_1, main_menu } from "./editmenuhere";
+import { dropdown_menu_1, main_menu } from "./menus";
 
 function LayoutNavbar() {
   // Togle Dropdown Mega Menu

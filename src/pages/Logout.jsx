@@ -6,7 +6,6 @@ import { HiInformationCircle } from "react-icons/hi";
 
 function Logout() {
   const navigate = useNavigate();
-  localStorage.clear();
   return (
     <>
       <div className="m-20">
